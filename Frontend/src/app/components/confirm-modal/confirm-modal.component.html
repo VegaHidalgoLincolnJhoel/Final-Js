@@ -1,0 +1,19 @@
+<div *ngIf="open" class="modal-backdrop-custom" (click)="cancelled.emit()">
+  <div class="card shadow-lg border-0 modal-card" (click)="$event.stopPropagation()" role="alertdialog" aria-modal="true">
+    <div class="card-body p-4">
+      <div class="d-flex align-items-start gap-3 mb-3">
+        <div class="bg-danger bg-opacity-10 text-danger rounded p-2 fs-5">⚠️</div>
+        <h5 class="fw-bold mb-0 pt-1">{{ title }}</h5>
+      </div>
+      <p class="text-muted mb-4">{{ message }}</p>
+      <div class="d-flex justify-content-end gap-2">
+        <button type="button" class="btn btn-outline-secondary btn-sm" (click)="cancelled.emit()">
+          {{ cancelLabel }}
+        </button>
+        <button type="button" class="btn btn-danger btn-sm" (click)="confirmed.emit()">
+          {{ confirmLabel }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

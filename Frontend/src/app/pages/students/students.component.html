@@ -1,0 +1,56 @@
+<!-- Alerta de éxito -->
+<div class="alert alert-success d-flex justify-content-between align-items-center" *ngIf="mensajeExito">
+  <span>✅ {{ mensajeExito }}</span>
+  <button class="btn-close btn-close-white" (click)="mensajeExito = ''"></button>
+</div>
+
+<!-- Alerta de error (manejo de errores HTTP) -->
+<div class="alert alert-danger d-flex justify-content-between align-items-center" *ngIf="error">
+  <span>⚠️ {{ error }}</span>
+  <button class="btn btn-sm btn-outline-danger" (click)="cargarEstudiantes()">Reintentar</button>
+</div>
+
+<!-- Estado de carga -->
+<div class="text-center py-5" *ngIf="cargando">
+  <div class="spinner-border text-success" role="status"></div>
+  <p class="text-muted small mt-2">Cargando estudiantes...</p>
+</div>
+
+<div class="row g-4" *ngIf="!cargando">
+  <div [class]="(modoFormulario !== 'idle' || estudianteParaNotas) ? 'col-lg-8' : 'col-12'">
+    <app-student-list
+      [estudiantes]="estudiantes"
+      (editar)="onEditar($event)"
+      (eliminar)="onEliminar($event)"
+      (gestionarNotas)="onGestionarNotas($event)"
+      (agregarNuevo)="onAgregarNuevo()">
+    </app-student-list>
+  </div>
+
+  <div class="col-lg-4" *ngIf="modoFormulario !== 'idle' || estudianteParaNotas">
+    <app-student-form
+      *ngIf="modoFormulario !== 'idle'"
+      [estudianteAEditar]="modoFormulario === 'editar' ? estudianteSeleccionado : null"
+      [codigosExistentes]="codigosExistentes"
+      [correosExistentes]="correosExistentes"
+      (guardar)="onGuardarEstudiante($event)"
+      (cancelar)="onCancelarFormulario()">
+    </app-student-form>
+
+    <app-course-grades-form
+      *ngIf="estudianteParaNotas"
+      [estudiante]="estudianteParaNotas"
+      (actualizar)="onActualizarCursos($event)"
+      (cerrar)="onCerrarNotas()">
+    </app-course-grades-form>
+  </div>
+</div>
+
+<app-confirm-modal
+  [open]="estudianteAEliminar !== null"
+  title="Eliminar estudiante"
+  [message]="estudianteAEliminar ? ('¿Está seguro de que desea eliminar a ' + estudianteAEliminar.nombres + ' ' + estudianteAEliminar.apellidos + '? Esta acción no se puede deshacer.') : ''"
+  confirmLabel="Sí, eliminar"
+  (confirmed)="confirmarEliminar()"
+  (cancelled)="estudianteAEliminar = null">
+</app-confirm-modal>

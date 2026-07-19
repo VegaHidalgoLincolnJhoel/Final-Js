@@ -1,0 +1,52 @@
+<!-- Estado de carga -->
+<div class="text-center py-5" *ngIf="cargando">
+  <div class="spinner-border text-success" role="status"></div>
+  <p class="text-muted small mt-2">Cargando información del dashboard...</p>
+</div>
+
+<!-- Estado de error (manejo de errores HTTP) -->
+<div class="alert alert-danger d-flex justify-content-between align-items-center" *ngIf="!cargando && error">
+  <span>⚠️ {{ error }}</span>
+  <button class="btn btn-sm btn-outline-danger" (click)="cargarEstudiantes()">Reintentar</button>
+</div>
+
+<ng-container *ngIf="!cargando && !error">
+  <app-stats-panel [estudiantes]="estudiantes"></app-stats-panel>
+
+  <div class="card shadow-sm border-0">
+    <div class="card-body p-4">
+      <div class="d-flex align-items-center gap-3 mb-3">
+        <div class="bg-success bg-opacity-10 text-success rounded p-2 fs-4">🎓</div>
+        <div>
+          <h5 class="fw-bold mb-0">Bienvenido al Sistema de Control Académico</h5>
+          <p class="text-muted small mb-0">Panel de visión general del rendimiento del ciclo lectivo actual.</p>
+        </div>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="border rounded p-3 h-100 bg-light">
+            <h6 class="text-uppercase small fw-bold">Gestión Ágil</h6>
+            <p class="text-muted small mb-0">Registra estudiantes, asigna cursos y actualiza calificaciones en tiempo real.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="border rounded p-3 h-100 bg-light">
+            <h6 class="text-uppercase small fw-bold">Búsqueda &amp; Filtro</h6>
+            <p class="text-muted small mb-0">Filtros por carrera y ciclo, con buscador automático de estudiantes.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="border rounded p-3 h-100 bg-light">
+            <h6 class="text-uppercase small fw-bold">Cálculo de Promedios</h6>
+            <p class="text-muted small mb-0">Evaluación dinámica del promedio y estado final del estudiante.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-end mt-3">
+        <a routerLink="/estudiantes" class="btn btn-dark btn-sm">Ir al listado de Estudiantes &rarr;</a>
+      </div>
+    </div>
+  </div>
+</ng-container>

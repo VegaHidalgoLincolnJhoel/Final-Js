@@ -1,0 +1,100 @@
+<div class="card shadow-sm border-0">
+  <div class="card-body p-4">
+    <div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-4">
+      <h5 class="fw-bold mb-0">
+        {{ estudianteAEditar ? 'Editar Estudiante' : 'Registrar Nuevo Estudiante' }}
+      </h5>
+      <button type="button" class="btn-close" (click)="cancelar.emit()" aria-label="Cerrar"></button>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="row g-3">
+        <div class="col-6">
+          <label class="form-label small fw-semibold text-uppercase">Código Académico</label>
+          <input type="text" class="form-control" placeholder="U202310452" formControlName="codigo"
+                 [class.is-invalid]="form.controls.codigo.invalid && form.controls.codigo.touched">
+          <div class="invalid-feedback" *ngIf="form.controls.codigo.errors?.['required']">
+            El código es obligatorio.
+          </div>
+          <div class="invalid-feedback" *ngIf="form.controls.codigo.errors?.['pattern']">
+            Formato inválido (ej. U202310452).
+          </div>
+          <div class="invalid-feedback" *ngIf="form.controls.codigo.errors?.['duplicado']">
+            Este código ya está registrado.
+          </div>
+        </div>
+
+        <div class="col-6">
+          <label class="form-label small fw-semibold text-uppercase">Ciclo Académico</label>
+          <select class="form-select" formControlName="ciclo"
+                  [class.is-invalid]="form.controls.ciclo.invalid && form.controls.ciclo.touched">
+            <option value="">Seleccione un ciclo</option>
+            <option *ngFor="let c of ciclos" [value]="c">Ciclo {{ c }}</option>
+          </select>
+          <div class="invalid-feedback" *ngIf="form.controls.ciclo.errors?.['required']">
+            Debe seleccionar un ciclo.
+          </div>
+        </div>
+
+        <div class="col-6">
+          <label class="form-label small fw-semibold text-uppercase">Nombres</label>
+          <input type="text" class="form-control" placeholder="María Elena" formControlName="nombres"
+                 [class.is-invalid]="form.controls.nombres.invalid && form.controls.nombres.touched">
+          <div class="invalid-feedback" *ngIf="form.controls.nombres.invalid">
+            Los nombres son obligatorios (mín. 2 caracteres).
+          </div>
+        </div>
+
+        <div class="col-6">
+          <label class="form-label small fw-semibold text-uppercase">Apellidos</label>
+          <input type="text" class="form-control" placeholder="Flores Ruiz" formControlName="apellidos"
+                 [class.is-invalid]="form.controls.apellidos.invalid && form.controls.apellidos.touched">
+          <div class="invalid-feedback" *ngIf="form.controls.apellidos.invalid">
+            Los apellidos son obligatorios (mín. 2 caracteres).
+          </div>
+        </div>
+
+        <div class="col-12">
+          <label class="form-label small fw-semibold text-uppercase">Carrera Profesional</label>
+          <select class="form-select" formControlName="carrera"
+                  [class.is-invalid]="form.controls.carrera.invalid && form.controls.carrera.touched">
+            <option value="">Seleccione una carrera</option>
+            <option *ngFor="let c of carreras" [value]="c">{{ c }}</option>
+          </select>
+          <div class="invalid-feedback" *ngIf="form.controls.carrera.errors?.['required']">
+            Debe seleccionar una carrera.
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="d-flex justify-content-between align-items-center mb-1">
+            <label class="form-label small fw-semibold text-uppercase mb-0">Correo Institucional</label>
+            <button type="button" class="btn btn-link btn-sm p-0 small"
+                    *ngIf="form.value.nombres && form.value.apellidos"
+                    (click)="generarCorreoSugerido()">
+              Generar correo sugerido
+            </button>
+          </div>
+          <input type="text" class="form-control" placeholder="mflores@institucion.edu.pe" formControlName="correo"
+                 [class.is-invalid]="form.controls.correo.invalid && form.controls.correo.touched">
+          <div class="invalid-feedback" *ngIf="form.controls.correo.errors?.['required']">
+            El correo institucional es obligatorio.
+          </div>
+          <div class="invalid-feedback" *ngIf="form.controls.correo.errors?.['pattern']">
+            Debe terminar en &#64;institucion.edu.pe
+          </div>
+          <div class="invalid-feedback" *ngIf="form.controls.correo.errors?.['duplicado']">
+            Este correo ya está registrado por otro estudiante.
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end gap-2 border-top pt-3 mt-4">
+        <button type="button" class="btn btn-outline-secondary btn-sm" (click)="cancelar.emit()">Cancelar</button>
+        <button type="submit" class="btn btn-success btn-sm">
+          {{ estudianteAEditar ? 'Guardar Cambios' : 'Registrar Estudiante' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

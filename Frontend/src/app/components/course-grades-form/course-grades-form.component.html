@@ -1,0 +1,74 @@
+<div class="card shadow-sm border-0">
+  <div class="card-body p-4">
+    <div class="d-flex align-items-start justify-content-between border-bottom pb-3 mb-4">
+      <div>
+        <h5 class="fw-bold mb-1">📘 Cursos y Calificaciones</h5>
+        <p class="text-muted small mb-0">
+          Estudiante: <strong>{{ estudiante.nombres }} {{ estudiante.apellidos }}</strong> ({{ estudiante.codigo }})
+        </p>
+      </div>
+      <button type="button" class="btn-close" (click)="cerrar.emit()" aria-label="Cerrar"></button>
+    </div>
+
+    <!-- Resumen: usa los pipes 'promedio' y 'condicion' -->
+    <div class="row bg-light rounded p-3 mb-4 border text-center">
+      <div class="col-6 border-end">
+        <p class="text-uppercase small text-muted mb-1" style="font-size:.65rem;">Promedio de Ciclo</p>
+        <p class="fs-3 fw-bold mb-0">{{ (estudiante | promedio) ?? '—' }}</p>
+      </div>
+      <div class="col-6 d-flex flex-column justify-content-center">
+        <p class="text-uppercase small text-muted mb-1" style="font-size:.65rem;">Estado</p>
+        <span class="badge rounded-pill align-self-center"
+              [class.text-bg-success]="(estudiante | promedio | condicion) === 'Aprobado'"
+              [class.text-bg-danger]="(estudiante | promedio | condicion) === 'Desaprobado'"
+              [class.text-bg-secondary]="(estudiante | promedio | condicion) === 'Sin calificación'">
+          {{ estudiante | promedio | condicion }}
+        </span>
+      </div>
+    </div>
+
+    <!-- Formulario agregar curso -->
+    <form [formGroup]="form" (ngSubmit)="agregarCurso()" class="bg-primary bg-opacity-10 rounded p-3 mb-4 border">
+      <h6 class="text-uppercase small fw-bold mb-2">Agregar Curso</h6>
+      <div class="row g-2">
+        <div class="col-7">
+          <input type="text" class="form-control form-control-sm" placeholder="Nombre del curso (ej. Matemática)"
+                 formControlName="nombreCurso">
+        </div>
+        <div class="col-3">
+          <input type="number" min="0" max="20" step="0.5" class="form-control form-control-sm"
+                 placeholder="Nota (0-20)" formControlName="calificacion">
+        </div>
+        <div class="col-2 d-grid">
+          <button type="submit" class="btn btn-primary btn-sm">Agregar</button>
+        </div>
+      </div>
+      <div class="text-danger small mt-2" *ngIf="error">⚠️ {{ error }}</div>
+    </form>
+
+    <!-- Lista de cursos -->
+    <h6 class="text-uppercase small fw-bold mb-2">Cursos Registrados ({{ estudiante.cursos.length }})</h6>
+
+    <div class="text-center text-muted small border border-dashed rounded py-4" *ngIf="estudiante.cursos.length === 0">
+      Sin cursos o calificaciones registradas en este ciclo.
+    </div>
+
+    <ul class="list-group" *ngIf="estudiante.cursos.length > 0" style="max-height: 220px; overflow-y: auto;">
+      <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let curso of estudiante.cursos">
+        <span class="small fw-semibold text-truncate me-2">{{ curso.nombre }}</span>
+        <span class="d-flex align-items-center gap-3">
+          <span class="badge" [class.text-bg-success]="curso.calificacion >= 11" [class.text-bg-danger]="curso.calificacion < 11">
+            {{ curso.calificacion }}
+          </span>
+          <button type="button" class="btn btn-sm btn-link text-danger p-0" (click)="eliminarCurso(curso.id)" title="Eliminar curso">
+            🗑
+          </button>
+        </span>
+      </li>
+    </ul>
+
+    <div class="d-flex justify-content-end border-top pt-3 mt-4">
+      <button type="button" class="btn btn-outline-secondary btn-sm" (click)="cerrar.emit()">Cerrar Calificaciones</button>
+    </div>
+  </div>
+</div>

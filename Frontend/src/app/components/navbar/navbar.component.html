@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top shadow-sm">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" routerLink="/dashboard">
+      <span class="bg-success rounded p-2 d-inline-flex">🎓</span>
+      <span>
+        <span class="fw-bold d-block">Control Académico</span>
+        <small class="text-secondary d-none d-sm-block" style="font-size: 0.65rem;">Angular · Integrantes 2 &amp; 3</small>
+      </span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboard" routerLinkActive="active fw-bold text-success">
+            Dashboard
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/estudiantes" routerLinkActive="active fw-bold text-success">
+            Estudiantes
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
