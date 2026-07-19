@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { Estudiante, Curso } from '../models/student.model';
 
-const API_URL = '/api/estudiantes';
+const API_URL = 'http://localhost:8080/api/estudiantes';
 
 /**
  * Servicio central de datos académicos.

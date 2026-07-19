@@ -12,8 +12,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
     // Simula la API REST real; delay simula latencia de red (Integrante 2 - Arquitectura)
-    importProvidersFrom(
-      HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { delay: 300, apiBase: 'api/' })
-    )
+    // importProvidersFrom(
+    //   HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { delay: 300, apiBase: 'api/' })
+    // )
   ]
 };

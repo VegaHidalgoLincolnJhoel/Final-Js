@@ -1,0 +1,86 @@
+[ {
+  "id" : "1",
+  "codigo" : "U202310452",
+  "nombres" : "María Elena",
+  "apellidos" : "Flores Ruiz",
+  "correo" : "mfloresr@institucion.edu.pe",
+  "carrera" : "Ingeniería de Sistemas",
+  "ciclo" : "V",
+  "cursos" : [ {
+    "id" : "c1",
+    "nombre" : "Algoritmos y Estructura de Datos",
+    "calificacion" : 16.0
+  }, {
+    "id" : "c2",
+    "nombre" : "Base de Datos I",
+    "calificacion" : 15.0
+  }, {
+    "id" : "c3",
+    "nombre" : "Cálculo Multivariable",
+    "calificacion" : 11.0
+  } ]
+}, {
+  "id" : "2",
+  "codigo" : "U202215893",
+  "nombres" : "Carlos Alberto",
+  "apellidos" : "Gómez Peralta",
+  "correo" : "cgomezp@institucion.edu.pe",
+  "carrera" : "Administración de Empresas",
+  "ciclo" : "VII",
+  "cursos" : [ {
+    "id" : "c4",
+    "nombre" : "Contabilidad Financiera",
+    "calificacion" : 12.0
+  }, {
+    "id" : "c5",
+    "nombre" : "Marketing Estratégico",
+    "calificacion" : 9.0
+  }, {
+    "id" : "c6",
+    "nombre" : "Administración de Operaciones",
+    "calificacion" : 13.0
+  } ]
+}, {
+  "id" : "3",
+  "codigo" : "U202410114",
+  "nombres" : "Ana Sofía",
+  "apellidos" : "Mendoza Castillo",
+  "correo" : "amendozac@institucion.edu.pe",
+  "carrera" : "Ingeniería Industrial",
+  "ciclo" : "III",
+  "cursos" : [ {
+    "id" : "c7",
+    "nombre" : "Física I",
+    "calificacion" : 18.0
+  }, {
+    "id" : "c8",
+    "nombre" : "Álgebra Lineal",
+    "calificacion" : 14.0
+  } ]
+}, {
+  "id" : "4",
+  "codigo" : "U202322301",
+  "nombres" : "Jorge Luis",
+  "apellidos" : "Quispe Huamán",
+  "correo" : "jquispeh@institucion.edu.pe",
+  "carrera" : "Ingeniería de Sistemas",
+  "ciclo" : "IV",
+  "cursos" : [ {
+    "id" : "c9",
+    "nombre" : "Programación Orientada a Objetos",
+    "calificacion" : 10.0
+  }, {
+    "id" : "c10",
+    "nombre" : "Matemática Discreta",
+    "calificacion" : 8.0
+  } ]
+}, {
+  "id" : "5",
+  "codigo" : "U202119954",
+  "nombres" : "Valeria Lucía",
+  "apellidos" : "Vargas Delgado",
+  "correo" : "vvargasd@institucion.edu.pe",
+  "carrera" : "Psicología",
+  "ciclo" : "IX",
+  "cursos" : [ ]
+} ]
