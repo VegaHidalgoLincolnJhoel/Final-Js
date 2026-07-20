@@ -24,8 +24,6 @@ type ModoFormulario = 'idle' | 'agregar' | 'editar';
 })
 export class StudentsComponent implements OnInit {
   estudiantes: Estudiante[] = [];
-  codigosExistentes: string[] = [];
-  correosExistentes: string[] = [];
   cargando = true;
   error = '';
 
@@ -48,15 +46,7 @@ export class StudentsComponent implements OnInit {
     this.cargarEstudiantes();
   }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
   private actualizarListasDeValidacion(): void {
-=======
-  actualizarListasExistentes(): void {
->>>>>>> Stashed changes
-=======
-  actualizarListasExistentes(): void {
->>>>>>> Stashed changes
     this.codigosExistentes = this.estudiantes.map(e => e.codigo);
     this.correosExistentes = this.estudiantes.map(e => e.correo);
   }
@@ -67,15 +57,7 @@ export class StudentsComponent implements OnInit {
     this.academicService.getEstudiantes().subscribe({
       next: (data) => {
         this.estudiantes = data;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
         this.actualizarListasDeValidacion();
-=======
-        this.actualizarListasExistentes();
->>>>>>> Stashed changes
-=======
-        this.actualizarListasExistentes();
->>>>>>> Stashed changes
         this.cargando = false;
       },
       error: (err) => { this.error = err.message; this.cargando = false; }
@@ -119,15 +101,7 @@ export class StudentsComponent implements OnInit {
     this.academicService.eliminarEstudiante(id).subscribe({
       next: () => {
         this.estudiantes = this.estudiantes.filter(e => e.id !== id);
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
         this.actualizarListasDeValidacion();
-=======
-        this.actualizarListasExistentes();
->>>>>>> Stashed changes
-=======
-        this.actualizarListasExistentes();
->>>>>>> Stashed changes
         if (this.estudianteSeleccionado?.id === id) { this.estudianteSeleccionado = null; this.modoFormulario = 'idle'; }
         if (this.estudianteParaNotas?.id === id) { this.estudianteParaNotas = null; }
         this.mostrarExito('Estudiante eliminado correctamente.');
@@ -147,15 +121,7 @@ export class StudentsComponent implements OnInit {
       this.academicService.actualizarEstudiante(this.estudianteSeleccionado.id, datos).subscribe({
         next: (actualizado) => {
           this.estudiantes = this.estudiantes.map(e => e.id === actualizado.id ? actualizado : e);
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
           this.actualizarListasDeValidacion();
-=======
-          this.actualizarListasExistentes();
->>>>>>> Stashed changes
-=======
-          this.actualizarListasExistentes();
->>>>>>> Stashed changes
           this.modoFormulario = 'idle';
           this.estudianteSeleccionado = null;
           this.mostrarExito(`Datos de ${actualizado.nombres} actualizados con éxito.`);
@@ -166,15 +132,7 @@ export class StudentsComponent implements OnInit {
       this.academicService.crearEstudiante({ ...datos, cursos: [] }).subscribe({
         next: (nuevo) => {
           this.estudiantes = [...this.estudiantes, nuevo];
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
           this.actualizarListasDeValidacion();
-=======
-          this.actualizarListasExistentes();
->>>>>>> Stashed changes
-=======
-          this.actualizarListasExistentes();
->>>>>>> Stashed changes
           this.modoFormulario = 'idle';
           this.mostrarExito(`Estudiante ${nuevo.nombres} ${nuevo.apellidos} registrado con éxito.`);
         },
@@ -194,7 +152,7 @@ export class StudentsComponent implements OnInit {
     this.academicService.actualizarEstudiante(actualizado.id, { cursos: actualizado.cursos }).subscribe({
       next: (est) => {
         this.estudiantes = this.estudiantes.map(e => e.id === est.id ? est : e);
-        this.actualizarListasExistentes();
+        this.actualizarListasDeValidacion();
         this.estudianteParaNotas = est;
         this.mostrarExito('Calificaciones actualizadas con éxito.');
       },
