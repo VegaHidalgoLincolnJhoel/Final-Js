@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { Estudiante, Curso } from '../models/student.model';
 
-const API_URL = 'https://control-academico-backend.onrender.com';
+const API_URL = 'https://control-academico-backend.onrender.com/api/estudiantes';
 
 /**
  * Servicio central de datos académicos.
