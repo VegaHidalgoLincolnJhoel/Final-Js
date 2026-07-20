@@ -1,0 +1,21 @@
+# Dependency directories
+node_modules/
+
+# Angular build outputs
+dist/
+tmp/
+out-of-memory.log
+
+# IDEs and editors
+.idea/
+.project
+.classpath
+.cproject
+.settings/
+.vscode/
+
+# Local angular cache
+.angular/
+
+# Vercel
+.vercel
