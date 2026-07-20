@@ -35,27 +35,33 @@ export class StudentsComponent implements OnInit {
   mensajeExito = '';
   private timeoutAlerta: any;
 
+  // Se recalculan solo cuando 'estudiantes' cambia (no en cada ciclo de
+  // detección de cambios), para no romper el formulario del hijo.
+  codigosExistentes: string[] = [];
+  correosExistentes: string[] = [];
+
   constructor(private academicService: AcademicService) {}
 
   ngOnInit(): void {
     this.cargarEstudiantes();
   }
 
+  private actualizarListasDeValidacion(): void {
+    this.codigosExistentes = this.estudiantes.map(e => e.codigo);
+    this.correosExistentes = this.estudiantes.map(e => e.correo);
+  }
+
   cargarEstudiantes(): void {
     this.cargando = true;
     this.error = '';
     this.academicService.getEstudiantes().subscribe({
-      next: (data) => { this.estudiantes = data; this.cargando = false; },
+      next: (data) => {
+        this.estudiantes = data;
+        this.actualizarListasDeValidacion();
+        this.cargando = false;
+      },
       error: (err) => { this.error = err.message; this.cargando = false; }
     });
-  }
-
-  get codigosExistentes(): string[] {
-    return this.estudiantes.map(e => e.codigo);
-  }
-
-  get correosExistentes(): string[] {
-    return this.estudiantes.map(e => e.correo);
   }
 
   mostrarExito(mensaje: string): void {
@@ -95,6 +101,7 @@ export class StudentsComponent implements OnInit {
     this.academicService.eliminarEstudiante(id).subscribe({
       next: () => {
         this.estudiantes = this.estudiantes.filter(e => e.id !== id);
+        this.actualizarListasDeValidacion();
         if (this.estudianteSeleccionado?.id === id) { this.estudianteSeleccionado = null; this.modoFormulario = 'idle'; }
         if (this.estudianteParaNotas?.id === id) { this.estudianteParaNotas = null; }
         this.mostrarExito('Estudiante eliminado correctamente.');
@@ -114,6 +121,7 @@ export class StudentsComponent implements OnInit {
       this.academicService.actualizarEstudiante(this.estudianteSeleccionado.id, datos).subscribe({
         next: (actualizado) => {
           this.estudiantes = this.estudiantes.map(e => e.id === actualizado.id ? actualizado : e);
+          this.actualizarListasDeValidacion();
           this.modoFormulario = 'idle';
           this.estudianteSeleccionado = null;
           this.mostrarExito(`Datos de ${actualizado.nombres} actualizados con éxito.`);
@@ -124,6 +132,7 @@ export class StudentsComponent implements OnInit {
       this.academicService.crearEstudiante({ ...datos, cursos: [] }).subscribe({
         next: (nuevo) => {
           this.estudiantes = [...this.estudiantes, nuevo];
+          this.actualizarListasDeValidacion();
           this.modoFormulario = 'idle';
           this.mostrarExito(`Estudiante ${nuevo.nombres} ${nuevo.apellidos} registrado con éxito.`);
         },

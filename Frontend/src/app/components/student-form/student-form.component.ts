@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Estudiante, CARRERAS, CICLOS } from '../../models/student.model';
@@ -36,8 +36,8 @@ export class StudentFormComponent implements OnChanges {
     correo: ['', [Validators.required, Validators.pattern(/^[A-Z0-9._%+-]+@institucion\.edu\.pe$/i)]]
   });
 
-  ngOnChanges(): void {
-    // Revalida duplicados de código y correo cada vez que cambian las listas
+  ngOnChanges(changes: SimpleChanges): void {
+  if (changes['codigosExistentes'] || changes['correosExistentes'] || changes['estudianteAEditar']) {
     this.form.controls.codigo.setValidators([
       Validators.required,
       Validators.pattern(/^U\d{8,9}$/i),
@@ -50,7 +50,9 @@ export class StudentFormComponent implements OnChanges {
     ]);
     this.form.controls.codigo.updateValueAndValidity({ emitEvent: false });
     this.form.controls.correo.updateValueAndValidity({ emitEvent: false });
+  }
 
+  if (changes['estudianteAEditar']) {
     if (this.estudianteAEditar) {
       this.form.setValue({
         codigo: this.estudianteAEditar.codigo,
@@ -64,6 +66,7 @@ export class StudentFormComponent implements OnChanges {
       this.form.reset({ codigo: '', ciclo: '', nombres: '', apellidos: '', carrera: '', correo: '' });
     }
   }
+}
 
   private duplicadoValidator(lista: string[], valorActual?: string) {
     return (control: AbstractControl): ValidationErrors | null => {
