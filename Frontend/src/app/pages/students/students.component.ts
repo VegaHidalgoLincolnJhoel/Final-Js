@@ -49,7 +49,11 @@ export class StudentsComponent implements OnInit {
   }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   private actualizarListasDeValidacion(): void {
+=======
+  actualizarListasExistentes(): void {
+>>>>>>> Stashed changes
 =======
   actualizarListasExistentes(): void {
 >>>>>>> Stashed changes
@@ -64,7 +68,11 @@ export class StudentsComponent implements OnInit {
       next: (data) => {
         this.estudiantes = data;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         this.actualizarListasDeValidacion();
+=======
+        this.actualizarListasExistentes();
+>>>>>>> Stashed changes
 =======
         this.actualizarListasExistentes();
 >>>>>>> Stashed changes
@@ -112,7 +120,11 @@ export class StudentsComponent implements OnInit {
       next: () => {
         this.estudiantes = this.estudiantes.filter(e => e.id !== id);
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         this.actualizarListasDeValidacion();
+=======
+        this.actualizarListasExistentes();
+>>>>>>> Stashed changes
 =======
         this.actualizarListasExistentes();
 >>>>>>> Stashed changes
@@ -136,7 +148,11 @@ export class StudentsComponent implements OnInit {
         next: (actualizado) => {
           this.estudiantes = this.estudiantes.map(e => e.id === actualizado.id ? actualizado : e);
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
           this.actualizarListasDeValidacion();
+=======
+          this.actualizarListasExistentes();
+>>>>>>> Stashed changes
 =======
           this.actualizarListasExistentes();
 >>>>>>> Stashed changes
@@ -151,7 +167,11 @@ export class StudentsComponent implements OnInit {
         next: (nuevo) => {
           this.estudiantes = [...this.estudiantes, nuevo];
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
           this.actualizarListasDeValidacion();
+=======
+          this.actualizarListasExistentes();
+>>>>>>> Stashed changes
 =======
           this.actualizarListasExistentes();
 >>>>>>> Stashed changes

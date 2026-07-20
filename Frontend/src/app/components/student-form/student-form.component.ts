@@ -1,5 +1,9 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, inject } from '@angular/core';
+=======
+import { Component, EventEmitter, Input, OnChanges, Output, inject, SimpleChanges } from '@angular/core';
+>>>>>>> Stashed changes
 =======
 import { Component, EventEmitter, Input, OnChanges, Output, inject, SimpleChanges } from '@angular/core';
 >>>>>>> Stashed changes
@@ -42,8 +46,11 @@ export class StudentFormComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   if (changes['codigosExistentes'] || changes['correosExistentes'] || changes['estudianteAEditar']) {
 =======
+=======
+>>>>>>> Stashed changes
     // Revalida duplicados de código y correo cada vez que cambian las listas
 >>>>>>> Stashed changes
     this.form.controls.codigo.setValidators([
@@ -61,6 +68,7 @@ export class StudentFormComponent implements OnChanges {
   }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   if (changes['estudianteAEditar']) {
     if (this.estudianteAEditar) {
       this.form.setValue({
@@ -74,6 +82,8 @@ export class StudentFormComponent implements OnChanges {
     } else {
       this.form.reset({ codigo: '', ciclo: '', nombres: '', apellidos: '', carrera: '', correo: '' });
 =======
+=======
+>>>>>>> Stashed changes
     if (changes['estudianteAEditar']) {
       if (this.estudianteAEditar) {
         this.form.setValue({
@@ -87,6 +97,9 @@ export class StudentFormComponent implements OnChanges {
       } else {
         this.form.reset({ codigo: '', ciclo: '', nombres: '', apellidos: '', carrera: '', correo: '' });
       }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     }
   }
